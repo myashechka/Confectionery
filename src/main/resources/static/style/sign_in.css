@@ -1,0 +1,116 @@
+.form
+{
+    width: 100%;
+    background: no-repeat center/100% url("../image/form.jpg");;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.form_div
+        {
+                margin: 1vh auto;
+                width: 40vw;
+                position: relative;
+                box-sizing: border-box;
+                display: flex;
+                justify-content: space-around;
+                justify-items: center;
+                flex-flow: wrap row;
+        }
+
+        .form_content
+        {
+            width: 100%;
+            box-sizing: border-box;
+            margin: 2% auto;
+            padding: 40px;
+            position: relative;
+            background-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            z-index: 0;
+            transition:0.5s;
+            color: #fff;
+            font-size: 1.3em;
+        }
+
+        .form_content form input{
+            box-sizing: border-box;
+            display: block;
+            width: 100%;
+            height: 7vh;
+            margin-bottom: 5%;
+            border: none;
+            border-radius: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(100px);
+            padding: 15px;
+            z-index: 5;
+            transition: 0.5s;
+        }
+
+        .form_content form input:focus{
+            border: none;
+            background-color: rgba(255, 255, 255, 0.407);
+        }
+
+        .form_content form input:focus::placeholder{
+            color: rgb(105, 103, 103);
+        }
+
+        .form_content form input::placeholder
+        {
+            padding: 10px 20px;
+            line-height: 5em;
+            font-size: 1.3em;
+            color:rgb(111, 110, 110);
+        }
+
+        .form_content form button{
+            font-family: 'PT';
+            cursor: pointer;
+            display: block;
+            height: 6vh;
+            margin: 8% auto 0;
+            border-radius: 40px;
+            background-color:white;
+            backdrop-filter: blur(100px);
+            padding: 10px 100px;
+            font-size: 15px;
+            border: none;
+            color:rgb(79, 78, 78);
+            transition: 0.5s;
+            z-index: 5;
+        }
+
+        .form_content form button:hover
+        {
+            background-color: rgba(222, 158, 177, 0.365);;;
+            color:white;
+        }
+        .form h3
+        {
+            font-size: 2.5em;
+            margin:20px;
+            margin-top: 10px;
+            color:rgb(79, 78, 78);
+        }
+
+        .form i{
+            font-size: 2.5em;
+            margin:20px;
+            margin-bottom: 0;
+            color:rgb(79, 78, 78);
+        }
+
+        .form_content p{
+            color:rgb(79, 78, 78);
+            padding-top: 10px;
+            font-size: 15px;
+        }
+
+        .form_content a{
+            color:rgb(206, 143, 162);;
+        }

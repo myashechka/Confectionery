@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кафе-кондитерская "Bamell'"</title>
+    <link rel="icon" type="image/png" th:href="@{image/favicon.png}">
+    <link rel="stylesheet" th:href="@{style/catalog.css}">
+    <link rel="stylesheet" th:href="@{style/style.css}">
+    <script src="https://kit.fontawesome.com/de930eb799.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<header>
+    <img class="logo" th:src = "@{image/logo.png}">
+
+    <div class="menu">
+        <ul>
+            <li><a class="menu__item" th:href="@{/index}">главная</a></li>
+            <li><a class="menu__item" th:href="@{/catalog}">меню</a></li>
+            <li><a class="menu__item" th:href="@{/constructor}">торты на заказ</a></li>
+            <li>
+                <div class="user_div">
+                    <a class="menu__item ord"  th:href="@{/login}" sec:authorize="!isAuthenticated()"><i class="fa-solid fa-user"></i></a>
+                    <div class="menu__item ord" sec:authorize="isAuthenticated()"><i class="fa-solid fa-user"></i></div>
+                    <div class="user_exit" sec:authorize="isAuthenticated()">
+                        <div class="user_exit__title" >Здравствуйте, <span th:text="${user.name}"></span>!</div>
+                        <form th:action="@{/logout}" method="post">
+                            <input type="submit" value="Выйти" class="exit_button">
+                        </form>
+                    </div>
+                </div>
+            </li>
+            <li><a sec:authorize="isAuthenticated()" class="menu__item" th:href="@{/cart}"><i class="fa-solid fa-cart-shopping"></i></a></li>
+        </ul>
+    </div>
+</header>
+    <main>
+        <div class = "text">
+            <h3>В нашей кондитерской вы найдёте широкий выбор тортов, пирожных, макарон и других десертов. Мы постоянно обновляем наш ассортимент и предлагаем новые, уникальные вкусы, чтобы удовлетворить все ваши желания.</h3>
+        </div>
+
+        <section>
+            <h2>Торты и чизкейки</h2>
+            <div class = "container" id = "container">
+                <div th:each="product: ${products}" class="product">
+                    <div class="img" th:style="'background:no-repeat center/100% url(' + ${product.image} + ');'"></div>
+                    <p class = "name" th:text="${product.name}"></p>
+                    <p class = "description" th:text="${product.description}"></p>
+                    <p class = "price"><span th:text="${product.price}"></span> р.</p>
+                    <div class = "buy">
+                        <div class = "amount">
+                            <button class="subtract">-</button>
+                            <p>1 шт.</p>
+                            <button class="add">+</button>
+                        </div>
+                        <a class="btn_cart" th:href="@{/addCartRec(productId=${product.id}, amountProduct = 0)}">В корзину</a>
+                    </div>
+                    <div class="att">
+                        <p>Для добавления товаров в корзину необходимо авторизоваться.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p> Bamell' &copy; 2023</p>
+    </footer>
+
+    
+<script src="script/catalog.js" sec:authorize="!isAuthenticated()"></script>
+<script src="script/catalog_auth.js" sec:authorize="isAuthenticated()"></script>
+</body>
+</html>

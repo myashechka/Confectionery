@@ -1,0 +1,169 @@
+.cart{
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    padding-left: 30px;
+    min-height: calc(100vh - 400px);
+}
+main{
+    min-height: calc(100vh - 220px);
+}
+.h{
+    display: block;
+    padding: 40px 30px;
+    text-align: center;
+    font-weight: 400;
+    font-size: 40px;
+}
+
+.att{
+    text-align: center;
+    color: rgba(229, 191, 202, 0.84);
+    font-size: 27px;
+}
+
+.cart_record{
+    margin-top: 25px;
+    display: flex;
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    flex-direction: row;
+    justify-content:space-between;
+    align-content: center;
+    align-items: center;
+}
+
+.cart_record::after{
+    content:"";
+    position: absolute;
+    bottom: -5%;
+    right: 5%;
+    width:90%;
+    height:1px;
+    background: rgb(78, 76, 76);
+}
+
+.product{
+
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 30%;
+    height: 200px;
+    margin: 15px;
+    text-align: left;
+    align-items: baseline;
+}
+
+.img{
+    height: 200px;
+    width: 150px;
+    background: no-repeat center/100% url("../image/cake1.png");
+}
+
+.product .name{
+    padding: 25px;
+    font-size: 20px;
+}
+
+.product .description{
+    display: block;
+    width: 450px;
+    padding-left: 25px;
+    font-size: 15px;
+    color: rgb(78, 76, 76);
+}
+
+.buy{
+
+    width: 35%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: center;
+    align-items: baseline;
+}
+
+.buy .price{
+    padding: 15px 0 0 15px;
+    font-size: 25px;
+    color: #e4bec6;
+}
+
+
+.buy .amount{
+    display: flex;
+    width: 38%;
+    padding-top: 10px;
+    box-sizing: border-box;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 15px;
+    color: rgba(78, 76, 76, 0.688);
+}
+
+.buy .amount button{
+    width: 26px;
+    height: 26px;
+    border-radius: 13px;
+    border-width: 0.5px;
+    color: rgba(78, 76, 76, 0.394);
+    border-color: rgba(78, 76, 76, 0.394);
+    border-style: solid;
+    transition: 0.4s;
+    margin: 0 10px;
+}
+
+.cart_record i{
+    margin-right: 80px;
+    color: rgba(78, 76, 76, 0.688);
+}
+
+.result{
+    font-size: 23px;
+    box-sizing: border-box;
+    padding: 20px 60px;
+    margin-top: 30px;
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.btn_cart{
+    display: block;
+    transition: 0.4s;
+    width: 150px;
+    height: 30px;
+    text-align: center;
+    align-items: center;
+    margin-top: 20px;
+    padding: 15px;
+    margin-right: 20px;
+    border-style: solid;
+    border-width: 2px;
+    font-size: 18px;
+    border-color: #e4bec6;
+    color: #e4b8c1;
+    box-shadow: none;
+    background-color: white;
+    position: relative;
+    left: 85%;
+}
+
+.buy .amount button:hover, .btn_cart:hover{
+    color: white;
+    border-color: #e4bec6;
+    background: #e4bec6;
+}
+
+.hidden{
+    display: none;
+}

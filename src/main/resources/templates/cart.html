@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Кафе-кондитерская "Bamell'"</title>
+        <link rel="icon" type="image/png" href="image/favicon.png">
+        <link rel="stylesheet" href="style/cart.css">
+        <link rel="stylesheet" href="style/style.css">
+        <script src="https://kit.fontawesome.com/de930eb799.js" crossorigin="anonymous"></script>
+    </head>
+<body>
+    <header>
+        <img class="logo" src = "image/logo.png">
+
+        <div class="menu">
+            <ul>
+                <li><a class="menu__item" th:href="@{/index}">главная</a></li>
+                <li><a class="menu__item" th:href="@{/catalog}">меню</a></li>
+                <li><a class="menu__item" th:href="@{/constructor}">торты на заказ</a></li>
+                <li>
+                    <div class="user_div">
+                        <a class="menu__item ord"  th:href="@{/login}" sec:authorize="!isAuthenticated()"><i class="fa-solid fa-user"></i></a>
+                        <div class="menu__item ord" sec:authorize="isAuthenticated()"><i class="fa-solid fa-user"></i></div>
+                        <div class="user_exit" sec:authorize="isAuthenticated()">
+                            <div class="user_exit__title" >Здравствуйте, <span th:text="${user.name}"></span>!</div>
+                            <form th:action="@{/logout}" method="post">
+                                <input type="submit" value="Выйти" class="exit_button">
+                            </form>
+                        </div>
+                    </div>
+                </li>
+                <li><a sec:authorize="isAuthenticated()" class="menu__item" th:href="@{/cart}"><i class="fa-solid fa-cart-shopping"></i></a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <section>
+            <div class="cart">
+                <p class="h">Корзина</p>
+                <p class="att hidden">В корзине пусто, и это нужно срочно исправить!</p>
+                <div th:each="cartRecord: ${cartRecords}">
+                    <div class = "cart_record">
+                        <div class="product">
+                            <div class="img" th:style="'background:no-repeat center/100% url(' + ${cartRecord.product.image} + ');'"></div>
+                            <p class="name" th:text="${cartRecord.product.name}"></p>
+                            <p class="description" style="white-space: pre-line" th:text="${cartRecord.product.description}"></p>
+                        </div>
+
+
+                        <div class = "buy">
+                            <p class = "price one_price" th:text="${cartRecord.product.price} + ' руб/шт'"><span>р.</span></p>
+                            <div class = "amount">
+                                <p th:text="${cartRecord.amountProduct} + ' шт'" class="p_amount"></p>
+                            </div>
+                            <p class = "price res_price"></p>
+                        </div>
+                        <a th:href="@{/delCartRec(cartRecordId=${cartRecord.id})}"><i class="fa-solid fa-xmark"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="result">
+                <p>СУММА К ОПЛАТЕ: </p>
+                <p id="result"></p>
+            </div>
+            <a class="btn_cart" th:href="@{/order}">Оформить заказ</a>
+        </section>
+    </main>
+
+    <footer>
+        <p> Bamell' &copy; 2023</p>
+    </footer>
+
+    <script src="script/cart.js"></script> 
+    
+</body>
+</html>

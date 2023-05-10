@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кафе-кондитерская "Bamell'"</title>
+    <link rel="icon" type="image/png" th:href="@{image/favicon.png}">
+    <link rel="stylesheet" th:href="@{style/registration.css}">
+    <link rel="stylesheet" th:href="@{style/style.css}">
+    <script src="https://kit.fontawesome.com/de930eb799.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<header>
+    <img class="logo" th:src = "@{image/logo.png}">
+
+    <div class="menu">
+        <ul>
+            <li><a class="menu__item" th:href="@{/index}">главная</a></li>
+            <li><a class="menu__item" th:href="@{/catalog}">меню</a></li>
+            <li><a class="menu__item" th:href="@{/constructor}">торты на заказ</a></li>
+            <li>
+                <div class="user_div">
+                    <a class="menu__item ord"  th:href="@{/login}" sec:authorize="!isAuthenticated()"><i class="fa-solid fa-user"></i></a>
+                    <div class="menu__item ord" sec:authorize="isAuthenticated()"><i class="fa-solid fa-user"></i></div>
+                </div>
+            </li>
+            <li><a sec:authorize="isAuthenticated()" class="menu__item" th:href="@{/cart}"><i class="fa-solid fa-cart-shopping"></i></a></li>
+        </ul>
+    </div>
+</header>
+    <main>
+        <div class="form">
+            <div class="form_div">
+                <div class="form_content">
+                    <i class="fa-solid fa-user"></i>
+                    <h3>Регистрация</h3>
+                    <form action="#" th:action="@{/registration}" th:object="${user}" method="post" name="registration" id="registration">
+                        <div class="container_input">
+                            <input th:field="*{name}" type="text" name="name" id="name" placeholder="Имя" required="true">
+                            <input th:field="*{surname}" type="text" name="surname" id="surname" placeholder="Фамилия" required="true">
+                            <input th:field="*{phone}" type="tel" name="phone" id="phone" placeholder="Телефон" required="true">
+                            <input th:field="*{username}" type="text" name="username" id="username" placeholder="Логин" required="true">
+                            <input th:field="*{password}" type="password" name="password" id="password" placeholder="Пароль" required="true">
+                        </div>
+                        
+                        <button name="sub" type="submit">Зарегистрироваться</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p> Bamell' &copy; 2023</p>
+    </footer>
+
+</body>
+</html>

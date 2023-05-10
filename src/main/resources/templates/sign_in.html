@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кафе-кондитерская "Bamell'"</title>
+    <link rel="icon" type="image/png" th:href="@{image/favicon.png}">
+    <link rel="stylesheet" th:href="@{style/sign_in.css}">
+    <link rel="stylesheet" th:href="@{style/style.css}">
+    <script src="https://kit.fontawesome.com/de930eb799.js" crossorigin="anonymous"></script>
+</head>
+<body>
+<header>
+    <img class="logo" th:src = "@{image/logo.png}">
+
+    <div class="menu">
+        <ul>
+            <li><a class="menu__item" th:href="@{/index}">главная</a></li>
+            <li><a class="menu__item" th:href="@{/catalog}">меню</a></li>
+            <li><a class="menu__item" th:href="@{/constructor}">торты на заказ</a></li>
+            <li>
+                <div class="user_div">
+                    <a class="menu__item ord"  th:href="@{/login}" sec:authorize="!isAuthenticated()"><i class="fa-solid fa-user"></i></a>
+                    <div class="menu__item ord" sec:authorize="isAuthenticated()"><i class="fa-solid fa-user"></i></div>
+                    <div class="user_exit" sec:authorize="isAuthenticated()">
+                </div>
+            </li>
+            <li><a sec:authorize="isAuthenticated()" class="menu__item" th:href="@{/cart}"><i class="fa-solid fa-cart-shopping"></i></a></li>
+        </ul>
+    </div>
+</header>
+    <main>
+        <div class="form">
+            <div class="form_div">
+                <div class="form_content">
+                    <i class="fa-solid fa-user"></i>
+                    <h3>Вход в профиль</h3>
+                    <form action="#" th:action="@{/login}" th:object="${user}" method="post" name="login" id="login">
+                        <div class="container_input">
+                            <input th:field="*{username}" type="text" name="login" placeholder="Логин" required="true">
+                            <input th:field="*{password}" type="text" name="password" placeholder="Пароль" required="true">
+                        </div>
+                        
+                        <button name="sub" type="submit">Войти</button>
+                    </form>
+                    <p>Если у вас ещё нет аккаунта, <a th:href="@{/registration}">зарегистрируйтесь</a></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p> Bamell' &copy; 2023</p>
+    </footer>
+
+</body>
+</html>

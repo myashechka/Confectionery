@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Кафе-кондитерская "Bamell'"</title>
+        <link rel="icon" type="image/png" href="image/favicon.png">
+        <link rel="stylesheet" href="style/constructor.css">
+        <link rel="stylesheet" href="style/style.css">
+        <script src="https://kit.fontawesome.com/de930eb799.js" crossorigin="anonymous"></script>
+    </head>
+<body>
+    <header>
+        <img class="logo" src = "image/logo.png">
+
+        <div class="menu">
+            <ul>
+                <li><a class="menu__item" th:href="@{/index}">главная</a></li>
+                <li><a class="menu__item" th:href="@{/catalog}">меню</a></li>
+                <li><a class="menu__item" th:href="@{/constructor}">торты на заказ</a></li>
+                <li>
+                    <div class="user_div">
+                        <a class="menu__item ord"  th:href="@{/login}" sec:authorize="!isAuthenticated()"><i class="fa-solid fa-user"></i></a>
+                        <div class="menu__item ord" sec:authorize="isAuthenticated()"><i class="fa-solid fa-user"></i></div>
+                        <div class="user_exit" sec:authorize="isAuthenticated()">
+                            <div class="user_exit__title" >Здравствуйте, <span th:text="${user.name}"></span>!</div>
+                            <form th:action="@{/logout}" method="post">
+                                <input type="submit" value="Выйти" class="exit_button">
+                            </form>
+                        </div>
+                    </div>
+                </li>
+                <li><a sec:authorize="isAuthenticated()" class="menu__item" th:href="@{/cart}"><i class="fa-solid fa-cart-shopping"></i></a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <p class="h">Конструктор торта</p>
+        <div class="constr">
+            <div class="grey">
+                <form action="#" th:action="@{/createCake}" th:object="${constructorDTO}" method="post" name="createCake" id="createCake">
+                    <div class="flex_cont">
+                        <div class="weight">
+                            <p class="p">Вес: <span id="demo"></span> кг</p>
+                            <div class="slidecontainer">
+                                <input required th:field="*{weight}" type="range" min="1" max="15" value="1" class="slider" id="myRange">
+                            </div>            
+                        </div>
+                        <div class="count_yar">
+                            <p class="p">Количество ярусов</p>
+                            <div class="yar_cont">
+                                <div class="form_field">
+                                    <input required type="radio" class="cake_level" value="1" th:field="*{number_tiers}" checked>
+                                    <div class="img1"></div>
+                                    <p>1 ярус<p>
+                                </div>
+                                <div class="form_field">
+                                    <input required type="radio" class="cake_level" value="2" th:field="*{number_tiers}">
+                                    <div class="img2"></div>
+                                    <p>2 ярусa<p>
+                                </div>
+                                <div class="form_field">
+                                    <input required type="radio" class="cake_level" value="3" th:field="*{number_tiers}">
+                                    <div class="img3"></div>
+                                    <p>3 ярусa<p>
+                                </div>
+                        </div>
+                            
+                        </div>
+                    </div>
+        
+                    <div class="design">
+                        <p class="p">Дизайн</p>
+                        <div class="design_cont">
+                            <div class="des_field">
+                                <input required type="radio" name="des" th:field="*{design}" value="/image/des1.jpg" checked>
+                                <div class="d design1"></div>
+                            </div>
+                            <div class="des_field">
+                                <input required type="radio" name="des"  th:field="*{design}" value="/image/des2.jpg">
+                                <div class="d design2"></div>
+                            </div>
+                            <div class="des_field">
+                                <input required type="radio" name="des"  th:field="*{design}" value="/image/des3.jpg">
+                                <div class="d design3"></div>
+                            </div>
+                            <div class="des_field">
+                                <input required type="radio" name="des" th:field="*{design}" value="/image/des4.jpg">
+                                <div class="d design4"></div>
+                            </div>
+                        </div>       
+                    </div>
+        
+                    <div class="base">
+                        <p class="p">Основа</p>
+                        <div class="base_cont">
+                            <div class="base_field">
+                                <input required type="radio" class="bas" th:field="*{base}" value="Апельсин-Морковь-Карамель" checked>
+                                <p class="name">Апельсин - <br> Морковь - Карамель</p>
+                                <p class="decr">Нежное тесто, приготовленное по особой рецептуре, сочетается с лёгким кремом на основе апельсинового сока и измельчённых морковных крошек. А для заманчивой сладости добавляется слой карамели, сделанный из натуральных ингредиентов.</p>
+                                <p class="price"><span class="num">1700</span> руб/кг</p>
+                            </div>
+                            <div class="base_field">
+                                <input required type="radio" class="bas" th:field="*{base}" value="Черника-Шоколад">
+                                <p class="name">Черника - <br> Шоколад</p>
+                                <p class="decr"> Торт "Черника-Шоколад" - десерт, который объединяет в себе слои шоколадного бисквита, начинку из свежей черники и нежный шоколадный крем. Торт украшен ягодами и является отличным выбором для любого торжества.</p>
+                                <p class="price"><span class="num">2100</span> руб/кг</p>
+                            </div>
+                            <div class="base_field">
+                                <input required type="radio" class="bas" th:field="*{base}" value="Клубника-Пармезан">
+                                <p class="name">Клубника - Пармезан</p>
+                                <p class="decr">Клубника-Пармезан - торт с необычным сочетанием сладкой клубники и соленого пармезана. Основа торта - бисквит, а между слоями находится крем с пармезаном. Незабываемое сочетание вкусов для ценителей необычных десертов.</p>
+                                <p class="price"><span class="num">2300</span> руб/кг</p>
+                            </div>
+                            <div class="base_field">
+                                <input required type="radio" class="bas" th:field="*{base}" value="Три Шоколада">
+                                <p class="name">Три <br> Шоколада</p>
+                                <p class="decr">Три шоколада - роскошный шоколадный торт, состоящий из трех слоев пирожного коржа, пропитанных ликером, и нежных кремов из белого, молочного и темного шоколада. Это изысканное лакомство для любителей шоколада.</p>
+                                <p class="price"><span class="num">1900</span> руб/кг</p>
+                            </div>
+                        </div>    
+                    </div>
+
+                    <div class="result">
+                        <p class="p">Сумма к оплате: </p>
+                        <p class="p"><span class="res_p">0</span> руб.</p>
+                        <input type="text" value="0" th:field="*{price}" id="order_price" style="display: none">
+                    </div>
+                    <div class="att">
+                        <p>Для оформления заказа необходимо авторизоваться.</p>
+                    </div>
+                    <button class="btn_cart" type="submit">Оформить заказ</button>
+                </form>
+            </div>
+        </div>
+        
+    </main>
+
+    <footer>
+        <p> Bamell' &copy; 2023</p>
+    </footer>
+    <script src="script/constructor.js"></script>
+    <script src="script/constructor_not_auth.js" sec:authorize="!isAuthenticated()"></script>
+</body>
+</html>

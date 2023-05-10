@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Кафе-кондитерская "Bamell'"</title>
+        <link rel="icon" type="image/png" th:href="@{image/favicon.png}">
+        <link rel="stylesheet" th:href="@{style/index.css}">
+        <link rel="stylesheet" th:href="@{style/style.css}">
+        <script src="https://kit.fontawesome.com/de930eb799.js" crossorigin="anonymous"></script>
+    </head>
+<body>
+    <header>
+        <img class="logo" th:src = "@{image/logo.png}">
+
+        <div class="menu">
+            <ul>
+                <li><a class="menu__item" th:href="@{/index}">главная</a></li>
+                <li><a class="menu__item" th:href="@{/catalog}">меню</a></li>
+                <li><a class="menu__item" th:href="@{/constructor}">торты на заказ</a></li>
+                <li>
+                    <div class="user_div">
+                        <a class="menu__item ord"  th:href="@{/login}" sec:authorize="!isAuthenticated()"><i class="fa-solid fa-user"></i></a>
+                        <div class="menu__item ord" sec:authorize="isAuthenticated()"><i class="fa-solid fa-user"></i></div>
+                        <div class="user_exit" sec:authorize="isAuthenticated()">
+                            <div class="user_exit__title" >Здравствуйте, <span th:text="${user.name}"></span>!</div>
+                            <form th:action="@{/logout}" method="post">
+                                <input type="submit" value="Выйти" class="exit_button">
+                            </form>
+                        </div>
+                    </div>
+                </li>
+                <li><a sec:authorize="isAuthenticated()" class="menu__item" th:href="@{/cart}"><i class="fa-solid fa-cart-shopping"></i></a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <section>
+            <div class = "wallpaper"></div>
+        </section>
+
+        <section>
+            <div class = "about">
+                <h2>О нас</h2>
+                <div class="container">
+                    <div class = "about_text">
+                        <p>Bamell' – это уникальная кондитерская, которая заботится о своих клиентах, предлагая только самые свежие и вкусные десерты. Наша команда состоит из профессиональных кондитеров, которые тщательно отбирают ингредиенты и создают каждый десерт с любовью и заботой о качестве.</p>
+                        <br>
+                        <p>В нашей кондитерской вы найдёте широкий выбор тортов, пирожных, макарон и других десертов. Мы постоянно обновляем наш ассортимент и предлагаем новые, уникальные вкусы, чтобы удовлетворить все ваши желания.</p>
+                        <br>
+                        <p>Кроме того, у нас вы можете заказать персонализированные торты и пирожные на любой праздник или мероприятие. Мы гарантируем, что каждый десерт будет сделан по вашим пожеланиям и превзойдёт все ваши ожидания.</p>
+                    </div>
+                    <div class = "slide_show">
+                        <div class="slide_container">
+                            <div class="slide" id="slide1"></div>
+                            <div class="slide" id="slide2"></div>
+                            <div class="slide" id="slide3"></div>
+                        </div>
+                        <div class="btn_slide" id="btn_left"><i class="fa-solid fa-chevron-left"></i></div>
+                        <div class="btn_slide" id="btn_right"><i class="fa-solid fa-chevron-right"></i></div>
+                        <span class="point current_point" id="point1"></span>
+                        <span class="point" id="point2"></span>
+                        <span class="point" id="point3"></span>
+                    </div>
+                </div>
+                <script th:src="@{script/index.js}"></script>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p> Bamell' &copy; 2023</p>
+    </footer>
+    
+</body>
+</html>

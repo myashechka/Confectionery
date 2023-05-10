@@ -55,6 +55,7 @@ public class SecurityConfig {
                         .requestMatchers("index").permitAll()
                         .requestMatchers("registration").permitAll()
                         .requestMatchers("cart").authenticated()
+                        .requestMatchers("addCartRec").authenticated()
                         .requestMatchers("**").permitAll()
 
                 )

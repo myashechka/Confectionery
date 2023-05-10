@@ -25,9 +25,6 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class UserController {
     private final UserService userService;
-    private final ProductService productService;
-
-    private final CartRecordService cartRecordService;
 
     @GetMapping("index")
     public String index(Model model, Authentication authentication)
@@ -36,46 +33,6 @@ public class UserController {
             model.addAttribute("user", (User) authentication.getPrincipal());
         }
         return "index";
-    }
-
-    @GetMapping("catalog")
-    public String catalog(Model model, Authentication authentication) {
-        List<Product> products = productService.getAllByVisibleProduct(true);
-        model.addAttribute("products", products);
-        model.addAttribute("cartRecord", new CartRecord());
-        if (authentication != null) {
-            model.addAttribute("user", (User) authentication.getPrincipal());
-        }
-        return  "catalog";
-    }
-
-    @GetMapping("constructor")
-    public String getConstructor(Model model, Authentication authentication)
-    {
-        model.addAttribute("constructorDTO", new ConstructorDTO());
-        if (authentication != null) {
-            model.addAttribute("user", (User) authentication.getPrincipal());
-        }
-        return "constructor";
-    }
-
-    @PostMapping("createCake")
-    public String createCake(@ModelAttribute ConstructorDTO constructorDTO, Authentication authentication)
-    {
-        String description = constructorDTO.getDescription();
-        Product order = new Product(0, constructorDTO.getPrice(),
-                false, "Индивидуальный заказ", constructorDTO.getDesign(), description);
-        order = productService.addProduct(order);
-        User user = (User) authentication.getPrincipal();
-        cartRecordService.addCartRecord(user.getId(), order, 1);
-        return "redirect:/constructor";
-    }
-
-    @PostMapping("constructor")
-    public String postConstructor(@ModelAttribute Product product)
-    {
-        productService.addProduct(product);
-        return "constructor";
     }
 
     @GetMapping("registration")
@@ -112,43 +69,6 @@ public class UserController {
         return "redirect:/index";
     }
 
-    @GetMapping("addCartRec")
-    public String addCartRec(@RequestParam Integer productId, @RequestParam Integer amountProduct, Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
-        Product product = productService.getProduct(productId);
-        List<CartRecord> userCartRecords = cartRecordService.findAllCartRecordsById(user.getId());
-        for (CartRecord userCartRecord : userCartRecords) {
-            if (Objects.equals(userCartRecord.getProduct(), product)) {
-                userCartRecord.setAmountProduct(userCartRecord.getAmountProduct() + amountProduct);
-                cartRecordService.addCartRecord(userCartRecord);
-                return "redirect:/catalog";
-            }
-        }
-        cartRecordService.addCartRecord(user.getId(), product, amountProduct);
-        return "redirect:/catalog";
-    }
 
-    @GetMapping("cart")
-    public String cart(Model model, Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
-        List<CartRecord> cartRecords = cartRecordService.findAllCartRecordsById(user.getId());
-        model.addAttribute("cartRecords", cartRecords);
-        model.addAttribute("user", user);
-        return "cart";
-    }
-
-    @GetMapping("delCartRec")
-    public String delCartRec(@RequestParam Integer cartRecordId) {
-        cartRecordService.deleteCartRecord(cartRecordId);
-        return "redirect:/cart";
-    }
-
-    @GetMapping("order")
-    public String delAllCartRec(Authentication authentication) {
-        User user = (User) authentication.getPrincipal();
-        List<CartRecord> cartRecords = cartRecordService.findAllCartRecordsById(user.getId());
-        cartRecordService.deleteAllCartRecords(user.getId());
-        return "redirect:/cart";
-    }
 
 }
